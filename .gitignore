@@ -160,3 +160,19 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+/pabot_results/
+/.robotcode_cache/
+/.pabotsuitenames
+/log.html
+/output.xml
+/report.html
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/py-robot-automation.iml
+/.idea/vcs.xml
+/results/
+/result/log.html
+/result/result.html
+/result/result.xml
+/results.xml
