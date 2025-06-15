@@ -1,0 +1,12 @@
+robotframework
+robotframework-seleniumlibrary
+selenium
+robotframework-faker
+robotframework-pabot
+robotframework-robocop
+robotframework-debug
+webdriver-manager
+pytz~=2024.1
+requests
+openpyxl
+setuptools

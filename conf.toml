@@ -1,0 +1,10 @@
+[robot]
+base_url = "www.google.com"
+base_api = "123.323.23.1231/api/v4/"
+
+[test]
+folder_test = "./test"
+ignore_tag = "skip"
+
+[result]
+folder_result = "result"
