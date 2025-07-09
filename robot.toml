@@ -1,0 +1,9 @@
+[robot]
+BASE_URL = "https://www.google.com"
+BASE_API = "http://localhost:8080/api/v1/"
+BROWSER  = "chrome"
+TIMEOUT  = "20s"
+REMOTE_DRIVER = "http://localhost:4444"
+
+[logging]
+RESULT_FOLDER = "output"

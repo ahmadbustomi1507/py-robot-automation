@@ -1,7 +1,0 @@
-[robot]
-BASE_URL = "https://www.google.com"
-BASE_API = "123.323.23.1231/api/v4/"
-BROWSER  = "chrome"
-
-[logging]
-RESULT_FOLDER = "results"
