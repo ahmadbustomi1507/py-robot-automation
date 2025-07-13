@@ -29,7 +29,8 @@ Open Browser Then Access Base URL
         ...    remote_url=http://localhost:4444
     END
 
-    Set Window Size    1400    900
+#    Set Window Size    1400    900
+    Maximize Browser Window
     Set Selenium Speed    0.1ms
     Set Selenium Timeout   ${TIMEOUT}
     Set Log Level    INFO

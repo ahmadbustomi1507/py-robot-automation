@@ -1,0 +1,31 @@
+# To execute this docker-compose yml file use
+#`docker-compose  -f docker-compose-mobile-grid.yaml up --detach `
+
+services:
+  selenium-hub:
+    image: selenium/hub:latest
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+    environment:
+      - SE_NODE_SESSION_TIMEOUT=60
+      - SE_SESSION_REQUEST_TIMEOUT=60
+
+  device-1:
+    image: appium/appium
+    container_name: device-1
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    privileged: true
+    volumes:
+      - /dev/bus/usb:/dev/bus/usb
+      - ~/.android:/root/.android
+      - ./appFolder:/root/tmp
+    ports:
+      - 4723:4723
+    environment:
+      - CONNECT_TO_GRID=true
+      - SELENIUM_HOST=selenium_hub
+    command: >
+      sh -c "appium plugin install --source=npm appium-device-farm && appium server -ka 800 --use-plugins=device-farm  -pa /wd/hub --plugin-device-farm-platform=android"

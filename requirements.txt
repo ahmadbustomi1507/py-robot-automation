@@ -5,6 +5,7 @@ robotframework-faker==5.0.0
 robotframework-pabot
 robotframework-robocop
 robotframework-debug
+robotframework-appiumlibrary
 webdriver-manager
 pytz~=2024.1
 requests
