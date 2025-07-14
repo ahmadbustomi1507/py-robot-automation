@@ -7,11 +7,15 @@ Test Setup    Run Keywords
 ...    AND    
 ...    Log To Console    opening the browser ${BASE_URL}
 
-Test Teardown    Close Browser
+Test Teardown    Run Keywords    
+...    Close Browser
+...    AND
+...    Stop Video Recording
 
 *** Test Cases ***
 Test Checkout 1
     [Tags]    checkout
+    Start Video Recording
     Capture Page Screenshot    home_page.png
     Signing With Correct Password
     
@@ -21,7 +25,6 @@ Test Checkout 1
     Access shopping cart
     Checkout the product
     Complete the transaction
-    Sleep    10s
 
 *** Keywords ***
 Complete the transaction
@@ -39,11 +42,12 @@ Checkout the product
     Wait Until Page Contains    Checkout: Overview
     Click Button    css:button#finish
 
+
 Access shopping cart
     Click Element    css:div#shopping_cart_container a
     Wait Until Page Contains    Your Cart
     Element Should Contain    css:div#cart_contents_container .cart_list    ${item1}
-    
+
 
 Add to cart
     Click Button    css:button#add-to-cart
@@ -76,4 +80,4 @@ Choose product
     #detail price
     ${price}    Get Text    css:.inventory_details_desc_container .inventory_details_price
 
-    [Return]    ${nama_produk}    ${deskripsi}    ${price}
+    RETURN  ${nama_produk}    ${deskripsi}    ${price}

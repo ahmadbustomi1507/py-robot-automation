@@ -6,6 +6,7 @@ robotframework-pabot
 robotframework-robocop
 robotframework-debug
 robotframework-appiumlibrary
+robotframework-screencaplibrary
 webdriver-manager
 pytz~=2024.1
 requests

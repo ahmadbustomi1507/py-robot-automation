@@ -7,7 +7,9 @@ Library    FakerLibrary    locale=id_ID
 Library    DateTime
 Library    Collections
 Library    utility.py
+Library    ScreenCapLibrary
 Resource   pages/ImportPages.resource
+
 
 *** Keywords ***
 Initialization For Web Testing
@@ -23,8 +25,9 @@ Initialization For Web Testing
 
     #Logging configuration
     Set Suite Variable        ${RESULT_FOLDER}      ${CONF.logging.RESULT_FOLDER}
-    Set Screenshot Directory     ${RESULT_FOLDER}/screenshot
-
+    SeleniumLibrary.Set Screenshot Directory     ${RESULT_FOLDER}/screenshot
+    ScreenCapLibrary.Set Screenshot Directory    ${RESULT_FOLDER}/screenshot
+    
 Open Browser Then Access Base URL
     [Arguments]
     ...    ${url}=${BASE_URL}
@@ -56,7 +59,8 @@ Open Browser Then Access Base URL
 
     #Set Window Size    1400    900
     Maximize Browser Window
-    Set Selenium Speed    0.1ms
+    #Set Selenium Speed    0.1ms
+    Set Selenium Speed    100ms
     Set Selenium Timeout   ${TIMEOUT}
     Set Log Level    INFO
 
