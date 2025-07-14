@@ -1,8 +1,30 @@
 *** Settings ***
 Documentation    Setup webdriver for web testing
-Resource         resource/config.resource
+Library    SeleniumLibrary    timeout=5s    run_on_failure=Capture Page Screenshot
+Library    RobotDebug
+Library    String
+Library    FakerLibrary    locale=id_ID
+Library    DateTime
+Library    Collections
+Library    utility.py
+Resource   pages/ImportPages.resource
 
 *** Keywords ***
+Initialization For Web Testing
+    Log To Console        Starting initalization for Web Testing
+
+    # Parsing configuration files robot.toml
+    &{CONF}    Parsing Configuration    robot.toml
+
+    #Robot configuration
+    FOR    ${x}    IN    @{CONF.robot}
+        Set Suite Variable    ${${x}}    ${CONF.robot.${x}}
+    END
+
+    #Logging configuration
+    Set Suite Variable        ${RESULT_FOLDER}      ${CONF.logging.RESULT_FOLDER}
+    Set Screenshot Directory     ${RESULT_FOLDER}/screenshot
+
 Open Browser Then Access Base URL
     [Arguments]
     ...    ${url}=${BASE_URL}
@@ -10,14 +32,17 @@ Open Browser Then Access Base URL
     [Documentation]
     ...    opening browser then go to web address that has been
     ...    setup in conf.tml (please check robot.BASE_URL)
-    
+
     ${IS_EMPTY}    Run Keyword And Return Status    Should Be Empty    ${REMOTE_DRIVER}
     IF    ${IS_EMPTY}
-        #Running with local webdriver
-        ${driverpath}    Evaluate    webdriver_manager.chrome.ChromeDriverManager().install()
-        ...    modules=webdriver_manager.chrome
+        # Try opening Browser
+        Log    Try opening browser with local webdriver
+        ${is_opened}    Run Keyword And Return Status    Open Browser    url=${url}    browser=${browser}
 
-        Open Browser
+        ${driverpath}    Run Keyword And Return If    not ${is_opened}
+        ...    Install Webdriver Based on Installed Browser    ${browser}
+
+        Run Keyword And Return If    not ${is_opened}    Open Browser
         ...    url=${url}
         ...    browser=${browser}
         ...    executable_path=${driverpath}
@@ -26,10 +51,10 @@ Open Browser Then Access Base URL
         Open Browser
         ...    url=${url}
         ...    browser=${browser}
-        ...    remote_url=http://localhost:4444
+        ...    remote_url=${REMOTE_DRIVER}
     END
 
-#    Set Window Size    1400    900
+    #Set Window Size    1400    900
     Maximize Browser Window
     Set Selenium Speed    0.1ms
     Set Selenium Timeout   ${TIMEOUT}

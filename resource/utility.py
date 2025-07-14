@@ -3,11 +3,26 @@ import os
 import json
 import openpyxl
 import toml
-from typing import Union
+from typing import Union, Any
 from datetime import datetime,timedelta
 from robot.api.deco import keyword,not_keyword
 from robot.libraries.BuiltIn import BuiltIn
+import webdriver_manager.chrome
+import webdriver_manager.firefox
+import webdriver_manager.microsoft
+
 result_folder = BuiltIn().get_variable_value("$RESULT_FOLDER")
+
+def install_webdriver_based_on_installed_browser(browser: str ="google-chrome") -> str:
+    match browser:
+        case    "google-chrome":
+            return webdriver_manager.chrome.ChromeDriverManager().install()
+        case "firefox":
+            return webdriver_manager.firefox.GeckoDriverManager().install()
+        case "edge":
+            return webdriver_manager.microsoft.EdgeChromiumDriverManager().install()
+        case _:
+            return "Unknown browser name, please check webdriver_manager documentation"
 
 @keyword
 def get_absolute_path(file_path: str) -> str:
