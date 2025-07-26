@@ -15,7 +15,7 @@ result_folder = BuiltIn().get_variable_value("$RESULT_FOLDER")
 
 def install_webdriver_based_on_installed_browser(browser: str ="google-chrome") -> str:
     match browser:
-        case    "google-chrome":
+        case    "chrome":
             return webdriver_manager.chrome.ChromeDriverManager().install()
         case "firefox":
             return webdriver_manager.firefox.GeckoDriverManager().install()
