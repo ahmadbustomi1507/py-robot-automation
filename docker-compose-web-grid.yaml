@@ -28,7 +28,7 @@ services:
       - selenium-hub
       - chrome_a
     volumes:
-      - ./log/:/var/log/nginx/ # mount host log file ke container nginx
+      - ./log/:/var/log/nginx/
     ports:
       - "80:80"
 

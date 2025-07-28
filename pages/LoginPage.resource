@@ -1,3 +1,6 @@
+*** Settings ***
+Library    SeleniumLibrary    timeout=5s    run_on_failure=Capture Page Screenshot
+
 *** Variables ***
 ${sample_xpath}    xpath://a[.="Contract"]
 ${checkout_button}    css:button#checkout

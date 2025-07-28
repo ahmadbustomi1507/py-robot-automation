@@ -36,6 +36,10 @@ Open Browser Then Access Base URL
     ...    opening browser then go to web address that has been
     ...    setup in conf.tml (please check robot.BASE_URL)
 
+    #Adding web browser capabilities
+#    ${caps}    Create Dictionary
+#    ...    args=
+
     ${IS_EMPTY}    Run Keyword And Return Status    Should Be Empty    ${REMOTE_DRIVER}
     IF    ${IS_EMPTY}
         # Try opening Browser
@@ -44,17 +48,19 @@ Open Browser Then Access Base URL
 
         ${driverpath}    Run Keyword And Return If    not ${is_opened}
         ...    Install Webdriver Based on Installed Browser    ${browser}
-
+            
         Run Keyword And Return If    not ${is_opened}    Open Browser
         ...    url=${url}
         ...    browser=${browser}
         ...    executable_path=${driverpath}
+#        ...    options=add_argument("enable-automation");add_argument("")
     ELSE
         #Running with remote driver
         Open Browser
         ...    url=${url}
         ...    browser=${browser}
         ...    remote_url=${REMOTE_DRIVER}
+#        ...    options=
     END
 
     #Set Window Size    1400    900
