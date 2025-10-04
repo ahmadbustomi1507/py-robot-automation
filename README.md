@@ -1,6 +1,9 @@
 # py-robot-automation
 personal robot framework project
 
+# install driver for android
+appium driver install uiautomator2
+
 # logging appium to ports
 appium --webhook localhost:9876
 
