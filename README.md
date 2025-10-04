@@ -17,6 +17,7 @@ pabot --include <tag> --pythonpath . --testlevelsplit test
 appium plugin install --source=npm appium-device-farm
 appium plugin install --source=npm appium-dashboard
 
+# starting appium server
 [//]: # (-ka => --keep-alive-timeout)
 [//]: # (-pa => --base-path)
 appium server -ka 800 --use-plugins=device-farm,appium-dashboard -pa /wd/hub --plugin-device-farm-platform=Android
